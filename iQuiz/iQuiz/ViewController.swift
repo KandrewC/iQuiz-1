@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var tableView: UITableView!
     let textCellIdentifier = "quizCell"
+    let categories = ["Mathematics", "Marvel Super Heroes", "Science"]
+
     let quizzes = [("Mathematics", "Are you good at math?"), ("Marvel Super Heros", "Save the world one hero at a time."), ("Science", "Some fun science questions!")]
     
     override func viewDidLoad() {
@@ -62,14 +64,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBAction func settings(_ sender: AnyObject) {
-   
+        
         let alertController = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegue(withIdentifier: "questionScene", sender: indexPath)
+    }
     
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "questionScene") {
+            let controller = segue.destination as! QuestionViewController
+            let currentPath = self.tableView.indexPathForSelectedRow!
+            let quizCategory = categories[currentPath[1]]
+            controller.category = quizCategory
+        }
+    }
     
 }
-
