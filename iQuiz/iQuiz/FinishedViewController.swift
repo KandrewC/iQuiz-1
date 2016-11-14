@@ -26,7 +26,7 @@ class FinishedViewController: UIViewController {
         } else {
             answerLabel.text = "Practice makes perfect! Try again!"
         }
-        finalText.text = "You \(numCorrect) out of \(totalQuestions) correct. Try a different quiz!"
+        finalText.text = "You got \(numCorrect) out of \(totalQuestions) correct."
         // Do any additional setup after loading the view.
     }
 
